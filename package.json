@@ -1,0 +1,20 @@
+{
+  "name": "web-socket-chat-project",
+  "version": "1.0.0",
+  "description": "project of a study chat using web-sockets",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon ./src/server.js"
+  },
+  "author": "MoulOut <mmoulinlima@outlook.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
