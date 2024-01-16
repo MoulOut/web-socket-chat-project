@@ -20,9 +20,4 @@ httpServer.listen(PORT, () => {
 
 const io = new Server(httpServer);
 
-io.on('connection', (socket) => {
-    console.log('A client has connected');
-    socket.on('disconnect',() =>{
-        console.log('A client has disconnected');
-    })
-})
+export default io;
