@@ -1,14 +1,19 @@
 import { chatsCollection } from './dbConnect.js';
 
-function findDocument(documentName) {
-  const document = chatsCollection.findOne({ name: documentName });
-
-  return document;
+function obtainChats() {
+  const chats = chatsCollection.find().toArray();
+  return chats;
 }
 
-function updateChat(documentName, text) {
+function findChat(chatName) {
+  const chat = chatsCollection.findOne({ name: chatName });
+
+  return chat;
+}
+
+function updateChat(chatName, text) {
   const update = chatsCollection.updateOne(
-    { name: documentName },
+    { name: chatName },
     {
       $set: {
         text,
@@ -19,4 +24,4 @@ function updateChat(documentName, text) {
   return update;
 }
 
-export { findDocument, updateChat };
+export { findChat, updateChat, obtainChats };
