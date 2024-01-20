@@ -1,4 +1,4 @@
-import { alertAndRedirect, updateTextEditor } from './documento.js';
+import { alertAndRedirect, updateTextEditor } from './chat.js';
 
 const socket = io();
 

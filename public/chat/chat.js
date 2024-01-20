@@ -2,7 +2,7 @@ import {
   emitChatDelete,
   emitTextEditor,
   selectdocument,
-} from './socket-front-document.js';
+} from './socket-front-chat.js';
 
 const params = new URLSearchParams(window.location.search);
 const chatName = params.get('name');
@@ -11,7 +11,7 @@ const textEditor = document.getElementById('editor-texto');
 const chatTitle = document.getElementById('document-title');
 const deleteButton = document.getElementById('delete-chat');
 
-chatTitle.textContent = chatName;
+chatTitle.textContent = chatName  || 'chat sem titulo';
 deleteButton.addEventListener('click', () => {
   emitChatDelete(chatName);
 });
