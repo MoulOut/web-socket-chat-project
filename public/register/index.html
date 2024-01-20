@@ -21,14 +21,14 @@
     <hr>
     <h2 class="display-6 mb-3">Registration</h2>
 
-    <form id="form-cadastro">
+    <form id="form-registry">
       <div class="mb-3">
         <label for="input-usuario" class="form-label">User</label>
-        <input type="text" class="form-control" id="input-usuario" required>
+        <input type="text" class="form-control" id="input-user" required>
       </div>
       <div class="mb-3">
         <label for="input-senha" class="form-label">Password</label>
-        <input type="password" class="form-control" id="input-senha" required>
+        <input type="password" class="form-control" id="input-password" required>
       </div>
       <button type="submit" class="btn btn-primary mb-3">Register</button>
       <p>Already have an account? <a href="/login/index.html" class="link-primary">Login</a></p>
@@ -39,6 +39,7 @@
     crossorigin="anonymous"></script>
 
   <script src="/socket.io/socket.io.js"></script>
+  <script type="module" src="registry.js"></script>
 </body>
 
 </html>
