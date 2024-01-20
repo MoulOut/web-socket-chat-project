@@ -13,7 +13,7 @@ form.addEventListener('submit', (event) => {
 function insertChatsLink(chatName) {
   chatsList.innerHTML += `
         <a 
-          href="documento.html?name=${chatName}"
+          href="chat/index.html?name=${chatName}"
           class="list-group-item list-group-item-action"
           id="chat-${chatName}"
         >
