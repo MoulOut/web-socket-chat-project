@@ -32,4 +32,10 @@ function updateChat(chatName, text) {
   return update;
 }
 
-export { findChat, updateChat, obtainChats, addChat };
+function deleteChat(chatName) {
+  const deletedChat = chatsCollection.deleteOne({ name: chatName });
+  
+  return deletedChat;
+}
+
+export { findChat, updateChat, obtainChats, addChat, deleteChat };

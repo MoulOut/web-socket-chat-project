@@ -1,4 +1,4 @@
-import { insertChatsLink } from './index.js';
+import { insertChatsLink, removeChatLink } from './index.js';
 
 const socket = io();
 
@@ -19,5 +19,9 @@ function emitAddChat(chatName) {
 socket.on('existent_chat', (chatName) => {
   alert(`Chat ${chatName} already exists.`);
 });
+
+socket.on('delete_chat_interface',(chatName)=>{
+  removeChatLink(chatName);
+})
 
 export { emitAddChat };

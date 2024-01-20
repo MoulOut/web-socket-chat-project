@@ -1,4 +1,4 @@
-import { updateTextEditor } from './documento.js';
+import { alertAndRedirect, updateTextEditor } from './documento.js';
 
 const socket = io();
 
@@ -16,4 +16,12 @@ socket.on('text_editor_clients', (text) => {
   updateTextEditor(text);
 });
 
-export { emitTextEditor, selectdocument };
+function emitChatDelete(chatName) {
+  socket.emit('delete_chat', chatName);
+}
+
+socket.on('delete_chat_interface', (chatName) => {
+  alertAndRedirect(chatName);
+});
+
+export { emitTextEditor, selectdocument, emitChatDelete };

@@ -1,5 +1,6 @@
 import {
   addChat,
+  deleteChat,
   findChat,
   obtainChats,
   updateChat,
@@ -41,6 +42,14 @@ io.on('connection', (socket) => {
 
     if (updatedChat.modifiedCount) {
       socket.to(chatName).emit('text_editor_clients', text);
+    }
+  });
+
+  socket.on('delete_chat', async (chatName) => {
+    const deletedChat = await deleteChat(chatName);
+
+    if (deletedChat.deletedCount) {
+      io.emit('delete_chat_interface', chatName);
     }
   });
 

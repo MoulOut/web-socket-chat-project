@@ -13,12 +13,18 @@ form.addEventListener('submit', (event) => {
 function insertChatsLink(chatName) {
   chatsList.innerHTML += `
         <a 
-            href="documento.html?name=${chatName}"
-            class="list-group-item list-group-item-action"
+          href="documento.html?name=${chatName}"
+          class="list-group-item list-group-item-action"
+          id="chat-${chatName}"
         >
-            ${chatName}
+          ${chatName}
         </a>
    `;
 }
 
-export { insertChatsLink };
+function removeChatLink(chatName) {
+  const chat = document.getElementById(`chat-${chatName}`);
+  chatsList.removeChild(chat);
+}
+
+export { insertChatsLink, removeChatLink };

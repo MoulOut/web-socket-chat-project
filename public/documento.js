@@ -1,19 +1,27 @@
-import { emitTextEditor, selectdocument } from './socket-front-document.js';
+import {
+  emitChatDelete,
+  emitTextEditor,
+  selectdocument,
+} from './socket-front-document.js';
 
 const params = new URLSearchParams(window.location.search);
-const documentName = params.get('name');
+const chatName = params.get('name');
 
 const textEditor = document.getElementById('editor-texto');
-const documentTitle = document.getElementById('document-title');
+const chatTitle = document.getElementById('document-title');
+const deleteButton = document.getElementById('delete-chat');
 
-documentTitle.textContent = documentName;
+chatTitle.textContent = chatName;
+deleteButton.addEventListener('click', () => {
+  emitChatDelete(chatName);
+});
 
-selectdocument(documentName);
+selectdocument(chatName);
 
 textEditor.addEventListener('keyup', () => {
   emitTextEditor({
     text: textEditor.value,
-    documentName,
+    documentName: chatName,
   });
 });
 
@@ -21,4 +29,11 @@ function updateTextEditor(text) {
   textEditor.value = text;
 }
 
-export { updateTextEditor };
+function alertAndRedirect(chatName) {
+  if (chatName === params.get('name')) {
+    alert(`Chat ${chatName} excluido!`);
+    window.location.href = '/';
+  }
+}
+
+export { updateTextEditor, alertAndRedirect };
