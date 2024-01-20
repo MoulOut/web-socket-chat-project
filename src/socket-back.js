@@ -1,12 +1,30 @@
-import { findChat, obtainChats, updateChat } from './chatsDb.js';
+import {
+  addChat,
+  findChat,
+  obtainChats,
+  updateChat,
+} from './database/chatsDb.js';
 import io from './server.js';
 
 io.on('connection', (socket) => {
   socket.on('obtain_chats', async (returnChats) => {
-    console.log('Client is soliciting chats from DB.');
     const chats = await obtainChats();
 
     returnChats(chats);
+  });
+
+  socket.on('add_chat', async (chatName) => {
+    const chatAlreadyExist = (await findChat(chatName)) !== null;
+
+    if (chatAlreadyExist) {
+      socket.emit('existent_chat', chatName);
+    } else {
+      const chatToAdd = await addChat(chatName);
+
+      if (chatToAdd.acknowledged) {
+        io.emit('add_chat_interface', chatName);
+      }
+    }
   });
 
   socket.on('select_document', async (chatName, returnText) => {

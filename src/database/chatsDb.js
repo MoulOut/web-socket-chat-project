@@ -5,6 +5,14 @@ function obtainChats() {
   return chats;
 }
 
+function addChat(chatName) {
+  const chatToAdd = chatsCollection.insertOne({
+    name: chatName,
+    text: '',
+  });
+  return chatToAdd;
+}
+
 function findChat(chatName) {
   const chat = chatsCollection.findOne({ name: chatName });
 
@@ -24,4 +32,4 @@ function updateChat(chatName, text) {
   return update;
 }
 
-export { findChat, updateChat, obtainChats };
+export { findChat, updateChat, obtainChats, addChat };
