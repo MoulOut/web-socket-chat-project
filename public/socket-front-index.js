@@ -1,6 +1,16 @@
+import { obtainCookies } from './utils/cookies.js';
 import { insertChatsLink, removeChatLink } from './index.js';
 
-const socket = io();
+const socket = io('/users', {
+  auth: {
+    token: obtainCookies('jwtToken'),
+  },
+});
+
+socket.on('connect_error', (error) => {
+  alert(error);
+  window.location.href = '/login';
+});
 
 socket.emit('obtain_chats', (chats) => {
   chats.forEach((chat) => {
@@ -20,8 +30,8 @@ socket.on('existent_chat', (chatName) => {
   alert(`Chat ${chatName} already exists.`);
 });
 
-socket.on('delete_chat_interface',(chatName)=>{
+socket.on('delete_chat_interface', (chatName) => {
   removeChatLink(chatName);
-})
+});
 
 export { emitAddChat };
