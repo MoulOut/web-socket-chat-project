@@ -4,6 +4,8 @@ function registryEvents(socket, io) {
   socket.on('registry_user', async (userData) => {
     const isExistentUser = await findUser(userData.name);
 
+    console.log(isExistentUser);
+
     if (isExistentUser) {
       return socket.emit('existing_user');
     }
