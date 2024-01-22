@@ -1,18 +1,21 @@
 import { findUser, registryUser } from '../database/usersDb.js';
+import generateJWT from '../utils/generateJWT.js';
 
 function registryEvents(socket, io) {
   socket.on('registry_user', async (userData) => {
     const isExistentUser = await findUser(userData.user);
 
     if (isExistentUser) {
-      return socket.emit('existing_user');
-    }
-
-    const userToRegistry = await registryUser(userData);
-    if (userToRegistry.acknowledged) {
-      socket.emit('sucessfull_register');
+      socket.emit('existing_user');
     } else {
-      socket.emit('failed_register');
+      const userToRegistry = await registryUser(userData);
+      if (userToRegistry.acknowledged) {
+        const jwtToken = generateJWT({ username: user });
+        
+        socket.emit('sucessfull_register', jwtToken);
+      } else {
+        socket.emit('failed_register');
+      }
     }
   });
 }
