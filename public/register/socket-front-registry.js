@@ -1,10 +1,13 @@
+import { defineCookie } from '../utils/cookies';
+
 const socket = io();
 
 function emitRegistryUser(userObj) {
   socket.emit('registry_user', userObj);
 }
 
-socket.on('sucessfull_register', () => {
+socket.on('sucessfull_register', (jwtToken) => {
+  defineCookie('jwtToken', jwtToken);
   alert('Account registred successfully.');
   window.location.href = '/';
 });

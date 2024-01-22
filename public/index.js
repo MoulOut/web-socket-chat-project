@@ -1,8 +1,18 @@
 import { emitAddChat } from './socket-front-index.js';
+import { obtainCookies, removeCookie } from './utils/cookies.js';
+
+const jwtToken = obtainCookies('jwtToken');
 
 const chatsList = document.getElementById('chats-list');
 const form = document.getElementById('form-add-chat');
 const inputChat = document.getElementById('input-chat');
+const logoutButton = document.getElementById('logout-button');
+
+logoutButton.addEventListener('click', () => {
+  removeCookie('jwtToken');
+  alert('User logged out successfully');
+  window.location.href = '/login';
+});
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
