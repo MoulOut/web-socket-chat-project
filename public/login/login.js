@@ -1,4 +1,4 @@
-import { emitLogin } from "./socket-front-login";
+import { emitLogin } from "./socket-front-login.js";
 
 const form = document.getElementById('form-login');
 
