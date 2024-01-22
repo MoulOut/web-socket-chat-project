@@ -2,9 +2,7 @@ import { findUser, registryUser } from '../database/usersDb.js';
 
 function registryEvents(socket, io) {
   socket.on('registry_user', async (userData) => {
-    const isExistentUser = await findUser(userData.name);
-
-    console.log(isExistentUser);
+    const isExistentUser = await findUser(userData.user);
 
     if (isExistentUser) {
       return socket.emit('existing_user');
