@@ -1,7 +1,20 @@
 const socket = io();
 
-function emitLogin(userObj) {
-  socket.emit('user_login', userObj);
+function emitAutenticateUser(userObj) {
+  socket.emit('authenticate_user', userObj);
 }
 
-export { emitLogin };
+socket.on('successfull_auth', () => {
+  alert('User successfully authenticated.');
+  window.location.href = '/';
+});
+
+socket.on('failed_auth', () => {
+  alert('Failed to authenticate.');
+});
+
+socket.on('user_not_found', () => {
+  alert('User not found.');
+});
+
+export { emitAutenticateUser };
