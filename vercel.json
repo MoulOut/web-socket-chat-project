@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/socket-back.js",
+      "use": "@vercel/node"
+    }
+  ]
+}
