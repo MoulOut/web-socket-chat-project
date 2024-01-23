@@ -10,13 +10,26 @@ const chatName = params.get('name');
 const textEditor = document.getElementById('editor-texto');
 const chatTitle = document.getElementById('document-title');
 const deleteButton = document.getElementById('delete-chat');
+const connectedUsersList = document.getElementById('connected-users');
 
-chatTitle.textContent = chatName  || 'chat sem titulo';
+chatTitle.textContent = chatName || 'chat sem titulo';
 deleteButton.addEventListener('click', () => {
   emitChatDelete(chatName);
 });
 
-selectdocument(chatName);
+function successAuthTreatment(payloadToken) {
+  selectdocument({ chatName, username: payloadToken.username });
+}
+
+function updateInterfaceUsers(usersInChat) {
+  connectedUsersList.innerHTML = '';
+
+  usersInChat.forEach((username) => {
+    connectedUsersList.innerHTML += `
+    <li class="list-group-item">${username}</li>
+    `;
+  });
+}
 
 textEditor.addEventListener('keyup', () => {
   emitTextEditor({
@@ -36,4 +49,9 @@ function alertAndRedirect(chatName) {
   }
 }
 
-export { updateTextEditor, alertAndRedirect };
+export {
+  updateTextEditor,
+  alertAndRedirect,
+  successAuthTreatment,
+  updateInterfaceUsers,
+};

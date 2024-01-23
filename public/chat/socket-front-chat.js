@@ -1,5 +1,10 @@
 import { obtainCookies } from '../utils/cookies.js';
-import { alertAndRedirect, updateTextEditor } from './chat.js';
+import {
+  alertAndRedirect,
+  successAuthTreatment,
+  updateInterfaceUsers,
+  updateTextEditor,
+} from './chat.js';
 
 const socket = io('/users', {
   auth: {
@@ -7,16 +12,20 @@ const socket = io('/users', {
   },
 });
 
+socket.on('jwt_verified', successAuthTreatment);
+
 socket.on('connect_error', (error) => {
   alert(error);
   window.location.href = '/login';
 });
 
-function selectdocument(documentName) {
-  socket.emit('select_document', documentName, (documentText) => {
+function selectdocument(inputData) {
+  socket.emit('select_document', inputData, (documentText) => {
     updateTextEditor(documentText);
   });
 }
+
+socket.on('users_in_chat', updateInterfaceUsers);
 
 function emitTextEditor(data) {
   socket.emit('text_editor', data);

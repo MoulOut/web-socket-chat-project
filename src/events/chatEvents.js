@@ -1,11 +1,19 @@
 import { deleteChat, findChat, updateChat } from '../database/chatsDb.js';
+import { addConnection, obtainChatUsers } from '../utils/chatConnections.js';
 
 function chatEvents(socket, io) {
-  socket.on('select_document', async (chatName, returnText) => {
-    socket.join(chatName);
+  socket.on('select_document', async ({ chatName, username }, returnText) => {
     const document = await findChat(chatName);
 
     if (document) {
+      socket.join(chatName);
+
+      addConnection({ chatName, username });
+
+      const usersInChat = obtainChatUsers(chatName);
+
+      io.to(chatName).emit('users_in_chat', usersInChat);
+      
       returnText(document.text);
     }
   });

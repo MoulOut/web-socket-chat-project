@@ -1,4 +1,4 @@
-import { defineCookie } from '../utils/cookies';
+import { defineCookie } from '../utils/cookies.js';
 
 const socket = io();
 
