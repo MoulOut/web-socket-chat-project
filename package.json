@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start": "node ./src/socket-back.js",
     "dev": "nodemon ./src/socket-back.js"
   },
   "author": "MoulOut <mmoulinlima@outlook.com>",
