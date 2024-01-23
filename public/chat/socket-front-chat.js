@@ -25,6 +25,11 @@ function selectdocument(inputData) {
   });
 }
 
+socket.on('user_already_in_chat', () => {
+  alert('Chat already open in another page.');
+  window.location.href = '/';
+});
+
 socket.on('users_in_chat', updateInterfaceUsers);
 
 function emitTextEditor(data) {
