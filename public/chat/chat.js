@@ -34,7 +34,7 @@ function updateInterfaceUsers(usersInChat) {
 textEditor.addEventListener('keyup', () => {
   emitTextEditor({
     text: textEditor.value,
-    documentName: chatName,
+    chatName,
   });
 });
 

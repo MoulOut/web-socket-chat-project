@@ -19,8 +19,8 @@ function findChat(chatName) {
   return chat;
 }
 
-function updateChat(chatName, text) {
-  const update = chatsCollection.updateOne(
+async function updateChat(chatName, text) {
+  const update = await chatsCollection.updateOne(
     { name: chatName },
     {
       $set: {
@@ -28,7 +28,6 @@ function updateChat(chatName, text) {
       },
     }
   );
-
   return update;
 }
 

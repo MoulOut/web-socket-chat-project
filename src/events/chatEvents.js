@@ -34,7 +34,7 @@ function chatEvents(socket, io) {
 
     socket.on('text_editor', async ({ text, chatName }) => {
       const updatedChat = await updateChat(chatName, text);
-
+      console.log(updatedChat);
       if (updatedChat.modifiedCount) {
         socket.to(chatName).emit('text_editor_clients', text);
       }
